@@ -30,7 +30,7 @@ def get_prices(tickers, period="4y"):
                 print(f"[WARN] Sem dados para {ticker}")
                 continue
 
-            # 🔥 Corrigir MultiIndex
+            # 🔥 Corrigir (evita) o MultiIndex
             if isinstance(df.columns, pd.MultiIndex):
                 df.columns = df.columns.get_level_values(0)
 

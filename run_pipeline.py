@@ -73,15 +73,16 @@ def run():
             df_fund_silver["date"]
         ).dt.year
 
-        # 🔗 mesclar
-        # Forçamos as colunas de união a serem do mesmo tipo (string)
+        # transformar as colunas de união a no mesmo tipo (string)
         df_prices_silver['ticker'] = df_prices_silver['ticker'].astype(str)
         df_fund_silver['ticker'] = df_fund_silver['ticker'].astype(str)
+
+        # 🔗 mesclar
         df_gold = df_prices_silver.merge(
             df_fund_silver,
             on=["ticker", "year"],
-            how="left"
-        )
+            how="left")
+        
         df_gold = df_gold.reset_index()
         if "date_x" in df_gold.columns: # Caso o merge tenha gerado sufixos
             df_gold = df_gold.rename(columns={"date_x": "date"})
